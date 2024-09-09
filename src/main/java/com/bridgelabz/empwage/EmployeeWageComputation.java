@@ -6,13 +6,15 @@ public class EmployeeWageComputation {
     public static final int partTime=2;
     public static final int empRatePerHour=20;
     public static final int numOfWorkingDays=20;
+    public static final int maxHourMonth=10;
 
     public static void main(String[] args) {
         int empHour = 0;
-        int empWage = 0;
-        int totalEmpWage = 0;
+        int totalEmpHour=0;
+        int totalWorkingDays=0;
         System.out.println("Welcome to the Employee Wage Computation");
-        for (int day = 0; day < numOfWorkingDays; day++) {
+        while(totalEmpHour <= maxHourMonth && totalWorkingDays<numOfWorkingDays){
+            totalWorkingDays++;
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
             switch (empCheck) {
                 case partTime:
@@ -25,14 +27,13 @@ public class EmployeeWageComputation {
                     System.out.println("Employee is Full time.");
                     break;
                 default:
-                    System.out.println("Employee Absent");
                     break;
             }
-            empWage = empHour * empRatePerHour;
-            totalEmpWage+=empWage;
-            System.out.println("Employee Daily Wage is: " + empWage);
+            totalEmpHour+=empHour;
+            System.out.println("Total Working Days: "+totalWorkingDays+ " Employee Hours: "+empHour);
         }
-        System.out.println("Total Emp Wage:"+totalEmpWage);
+
+        int totalEmpWage=totalEmpHour*empRatePerHour;
+        System.out.println("Total Employee Wage is: " + totalEmpWage);
     }
 }
-
