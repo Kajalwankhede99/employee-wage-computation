@@ -1,6 +1,6 @@
 package com.bridgelabz.empwage;
 
-public class EmpWageBuilder {
+public class EmpWageBuilder implements IComputeEmpWage{
 
     public static final int FULL_TIME = 1;
     public static final int PART_TIME = 2;
@@ -12,12 +12,14 @@ public class EmpWageBuilder {
         companyEmpWageArray = new CompanyEmpWage[5];
     }
 
-    private void addCompanyEmpWage(String companyName, int empRatePerHour, int numWorkingDays, int maxHoursPerMonth) {
+    @Override
+    public void addCompanyEmpWage(String companyName, int empRatePerHour, int numWorkingDays, int maxHoursPerMonth) {
         companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHour, numWorkingDays, maxHoursPerMonth);
         numOfCompany++;
     }
 
-    private void computeEmpWage() {
+    @Override
+    public void computeEmpWage() {
         for (int i = 0; i < numOfCompany; i++) {
             int totalWage = calculateEmpWage(companyEmpWageArray[i]);
             companyEmpWageArray[i].setTotalWage(totalWage);
@@ -61,7 +63,7 @@ public class EmpWageBuilder {
     }
 
       public static void main(String[] args) {
-          EmpWageBuilder emp=new EmpWageBuilder();
+          IComputeEmpWage emp = new EmpWageBuilder();
           emp.addCompanyEmpWage("Relience",10,2,100);
           emp.addCompanyEmpWage("Wipro",20,4,100);
           emp.computeEmpWage();
