@@ -4,11 +4,8 @@ public class EmployeeWageComputation {
 
     public static final int fullTime = 1;
     public static final int partTime=2;
-    public static final int empRatePerHour=20;
-    public static final int numOfWorkingDays=20;
-    public static final int maxHourMonth=10;
 
-    public static int calculateEmpWage(){
+    public static int calculateEmpWage(String companyName,int empRatePerHour,int numOfWorkingDays,int maxHourMonth){
         int empHour = 0;
         int totalEmpHour=0;
         int totalWorkingDays=0;
@@ -34,11 +31,14 @@ public class EmployeeWageComputation {
         }
 
         int totalEmpWage=totalEmpHour*empRatePerHour;
-        System.out.println("Total Employee Wage is: " + totalEmpWage);
+        System.out.println("Total Employee Wage for company  "+companyName+" is " + totalEmpWage);
         return totalEmpWage;
     }
+
     public static void main(String[] args) {
-        calculateEmpWage();
+        calculateEmpWage("Capegemini Ltd",20,2,100);
+        calculateEmpWage("Accenture Ltd",10,2,100);
+        calculateEmpWage("Relience Ltd",30,2,100);
     }
 }
 
