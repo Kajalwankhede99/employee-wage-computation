@@ -1,32 +1,34 @@
 package com.bridgelabz.empwage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EmpWageBuilder implements IComputeEmpWage{
 
     public static final int FULL_TIME = 1;
     public static final int PART_TIME = 2;
 
-    private int numOfCompany = 0;
-    private CompanyEmpWage[] companyEmpWageArray;
+    private List<CompanyEmpWage> companyEmpWageList;
 
     public EmpWageBuilder() {
-        companyEmpWageArray = new CompanyEmpWage[5];
+        companyEmpWageList = new ArrayList<>();
     }
+
 
     @Override
     public void addCompanyEmpWage(String companyName, int empRatePerHour, int numWorkingDays, int maxHoursPerMonth) {
-        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(companyName, empRatePerHour, numWorkingDays, maxHoursPerMonth);
-        numOfCompany++;
+        CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHour, numWorkingDays, maxHoursPerMonth);
+        companyEmpWageList.add(companyEmpWage);
     }
 
     @Override
     public void computeEmpWage() {
-        for (int i = 0; i < numOfCompany; i++) {
-            int totalWage = calculateEmpWage(companyEmpWageArray[i]);
-            companyEmpWageArray[i].setTotalWage(totalWage);
-            System.out.println(companyEmpWageArray[i]);
+        for (CompanyEmpWage companyEmpWage : companyEmpWageList) {
+            int totalWage = calculateEmpWage(companyEmpWage);
+            companyEmpWage.setTotalWage(totalWage);
+            System.out.println(companyEmpWage);
         }
     }
-
 
     private int calculateEmpWage(CompanyEmpWage companyEmpWage) {
         int empHour = 0;
