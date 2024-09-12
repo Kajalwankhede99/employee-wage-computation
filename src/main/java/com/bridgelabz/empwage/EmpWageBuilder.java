@@ -1,7 +1,6 @@
 package com.bridgelabz.empwage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EmpWageBuilder implements IComputeEmpWage{
 
@@ -9,16 +8,18 @@ public class EmpWageBuilder implements IComputeEmpWage{
     public static final int PART_TIME = 2;
 
     private List<CompanyEmpWage> companyEmpWageList;
+    private Map<String, CompanyEmpWage> companyToEmpWageMap;
 
     public EmpWageBuilder() {
-        companyEmpWageList = new ArrayList<>();
+        companyEmpWageList = new LinkedList<>();
+        companyToEmpWageMap = new HashMap<>();
     }
-
 
     @Override
     public void addCompanyEmpWage(String companyName, int empRatePerHour, int numWorkingDays, int maxHoursPerMonth) {
         CompanyEmpWage companyEmpWage = new CompanyEmpWage(companyName, empRatePerHour, numWorkingDays, maxHoursPerMonth);
         companyEmpWageList.add(companyEmpWage);
+        companyToEmpWageMap.put(companyName, companyEmpWage);
     }
 
     @Override
@@ -57,7 +58,10 @@ public class EmpWageBuilder implements IComputeEmpWage{
 
             totalEmpHour += empHour;
             System.out.println("Total Working Days: " + totalWorkingDays + " Employee Hours: " + empHour);
-          }
+            int dailyWage = empHour * companyEmpWage.empRatePerHour;
+            companyEmpWage.addDailyWage(totalWorkingDays, dailyWage); // Store daily wage
+
+        }
 
             int totalEmpWage = totalEmpHour * companyEmpWage.empRatePerHour;
             System.out.println("Total Employee Wage for company  is: " + totalEmpWage);
@@ -68,8 +72,8 @@ public class EmpWageBuilder implements IComputeEmpWage{
           IComputeEmpWage emp = new EmpWageBuilder();
           emp.addCompanyEmpWage("Relience",10,2,100);
           emp.addCompanyEmpWage("Wipro",20,4,100);
+          emp.addCompanyEmpWage("Accenture", 20, 8, 100);
           emp.computeEmpWage();
-
         }
 }
 
