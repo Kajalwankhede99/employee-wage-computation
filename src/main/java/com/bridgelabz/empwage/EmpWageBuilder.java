@@ -26,9 +26,14 @@ public class EmpWageBuilder implements IComputeEmpWage{
     public void computeEmpWage() {
         for (CompanyEmpWage companyEmpWage : companyEmpWageList) {
             int totalWage = calculateEmpWage(companyEmpWage);
-            companyEmpWage.setTotalWage(totalWage);
+            companyEmpWage.setTotalEmpWage(totalWage);
             System.out.println(companyEmpWage);
         }
+    }
+
+    @Override
+    public int getTotalWage(String company) {
+        return companyToEmpWageMap.get(company).totalEmpWage;
     }
 
     private int calculateEmpWage(CompanyEmpWage companyEmpWage) {
@@ -74,6 +79,7 @@ public class EmpWageBuilder implements IComputeEmpWage{
           emp.addCompanyEmpWage("Wipro",20,4,100);
           emp.addCompanyEmpWage("Accenture", 20, 8, 100);
           emp.computeEmpWage();
+          System.out.println("Total wage for Accenture Company: " +emp.getTotalWage("Accenture"));
         }
 }
 

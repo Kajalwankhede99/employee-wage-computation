@@ -8,7 +8,7 @@ class CompanyEmpWage {
     public final int empRatePerHour;
     public final int numWorkingDays;
     public final int maxHoursPerMonth;
-    private int totalWage;
+    public int totalEmpWage;
     private Map<Integer, Integer> dailyWages;
 
 
@@ -21,8 +21,8 @@ class CompanyEmpWage {
 
     }
 
-    public void setTotalWage(int totalWage) {
-        this.totalWage = totalWage;
+    public void setTotalEmpWage(int totalEmpWage) {
+        this.totalEmpWage = totalEmpWage;
     }
     public void addDailyWage(int day, int wage) {
         dailyWages.put(day, wage);
